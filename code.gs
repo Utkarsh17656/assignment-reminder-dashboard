@@ -3,13 +3,14 @@ function onOpen() {
   var ui = SpreadsheetApp.getUi();
 
   ui.createMenu("Assignment Manager")
+    .addItem("Open Dashboard", "showDashboard")
     .addItem("Send Reminders", "sendReminders")
     .addToUi();
 
 }
 function showDashboard() {
 
-  var html = HtmlService.createHtmlOutputFromFile("dashboard")
+  var html = HtmlService.createHtmlOutputFromFile("Dashboard")
   .setTitle("Assignment Manager");
 
   SpreadsheetApp.getUi().showSidebar(html);
@@ -55,4 +56,17 @@ function sendReminders() {
   }
 
   Logger.log("Total Emails Sent: " + emailsSent);
+}
+function addAssignment(name, email, assignment, deadline) {
+
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+
+  sheet.appendRow([
+    name,
+    email,
+    assignment,
+    new Date(deadline),
+    "No"
+  ]);
+
 }

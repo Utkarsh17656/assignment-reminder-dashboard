@@ -1,21 +1,50 @@
 <!DOCTYPE html>
 <html>
-  <body style="font-family: Arial; padding: 20px;">
+<body style="font-family: Arial; padding:20px;">
 
-    <h2>Assignment Manager</h2>
+<h2>Assignment Manager</h2>
 
-    <button onclick="sendReminder()" style="padding:10px; margin:5px;">
-      Send Reminders
-    </button>
+<button onclick="sendReminder()">Send Reminders</button>
 
-    <script>
+<hr>
 
-      function sendReminder() {
-        google.script.run.sendReminders();
-        alert("Reminders sent successfully!");
-      }
+<h3>Add Assignment</h3>
 
-    </script>
+<label>Name</label><br>
+<input id="name"><br><br>
 
-  </body>
+<label>Email</label><br>
+<input id="email"><br><br>
+
+<label>Assignment</label><br>
+<input id="assignment"><br><br>
+
+<label>Deadline</label><br>
+<input type="date" id="deadline"><br><br>
+
+<button onclick="addAssignment()">Add Assignment</button>
+
+<script>
+
+function sendReminder(){
+  google.script.run.sendReminders();
+  alert("Reminders sent!");
+}
+
+function addAssignment(){
+
+  var name = document.getElementById("name").value;
+  var email = document.getElementById("email").value;
+  var assignment = document.getElementById("assignment").value;
+  var deadline = document.getElementById("deadline").value;
+
+  google.script.run.addAssignment(name,email,assignment,deadline);
+
+  alert("Assignment Added!");
+
+}
+
+</script>
+
+</body>
 </html>
